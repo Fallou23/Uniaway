@@ -1,0 +1,82 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/027fd7a33f.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'assets/css/contact.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+		<div class="contact-box">
+			<div class="left">
+                <div class="title">
+                    Siamo entusiasti di sentirti
+                 </div>
+                <div class="contact-text">
+                    <p>
+                    Che tu abbia bisogno di assistenza, ho voglia darci un suggerimento o semplicemente vuoi di darci il tuo feedback, siamo tutto orecchie.
+                    Il nostro team è qui per fornirti assistenza e supporto nel migliore dei modi
+                    </p>
+                </div>
+                <ul class="info-details">
+                    <!--
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Phone:</span> <a href="tel:+ 1235 2355 98">+ 1235 2355 98</a>
+                    </li>
+                    -->
+                    <li>
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Email:</span> <a href="#">help@uniaway.it</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <i class="fas fa-globe"></i>
+                        <span>Website:</span> <a href="/landing">uniaway.it</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <i class="fas fa-globe"></i>
+                        <span>Website:</span> <a href="/host_landing">uniaway.it</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+			<div class="right">
+				
+                <form action="contact" method="post">
+                {%csrf_token%}
+                <div class="field">
+                    <input name="username"  type="text" required>
+                    <label>il tuo nome </label>
+                 </div>
+                 <div class="field">
+                    <input name="email"  type="email" required >
+                    <label>la tua email </label>
+                 </div>
+                 <div class="field">
+                    <input name="phone-number"  type="number" required>
+                    <label>numero di telefono </label>
+                 </div>
+                 <div class="field-desc">
+                    <textarea name="message" id="caption" area required></textarea >
+                    <label>Messaggio</label>
+                 </div>
+				<button type="submit" class="btn">Invia</button>
+                </form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

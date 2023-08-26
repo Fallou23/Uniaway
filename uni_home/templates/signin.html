@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/signin.css' %}">
+    <title>Signin</title>
+</head>
+<body>
+   <header>
+      <nav>
+        <div class="site-title">
+         <a href="landing"><h1 class="logo"><span>Uni</span>Away</h1></a>
+        </div>
+      </nav>
+    </header>
+
+    
+       
+       
+        
+
+        
+
+    <div class="container">
+      <h1>Accedi</h1>
+      <form form action="" method="post">
+
+         <div>
+             <style>
+                  h5{
+                       color: red;
+                  }
+            </style>
+            {%for message in messages %}
+               <h5> {{message}} </h5>
+            {% endfor %}
+           </div>
+           {%csrf_token%}
+           <div class="field">
+            <input name="username"  type="text" required>
+            <label>Username </label>
+           </div>
+           <div class="field">
+            <input name="password"  type="password" required>
+            <label>Password </label>
+           </div>
+   
+           <div class="content">
+             <div class="pass-link">
+                <p href="#">Non hai ancora un account? <a href="/signup">Registrati</a></p>
+             </div>
+             <!--
+             <div class="checkbox">
+               <input type="checkbox" id="remember-me">
+               <label for="remember-me">Ricordati di me</label>
+             </div>
+            -->
+          </div>
+          
+   
+         <button type="submit">Login</button>
+      </form>
+   </div>
+      
+    </div>
+ </body>
+</html>

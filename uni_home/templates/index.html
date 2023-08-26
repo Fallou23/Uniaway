@@ -1,0 +1,233 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
+    <script src="https://kit.fontawesome.com/027fd7a33f.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+
+    <title>index</title>
+</head>
+<body>
+  {% if user_profile.seller %}
+  <header>
+    <nav>
+      <div class="site-title">
+        <a href="/landing"><h1 class="logo"><span>Uni</span>Away</h1></a>
+        <!--<img src="/static/assets/images/website_images/U H.png" width="100" height="100">-->
+      </div>
+      {% if user.is_authenticated %}
+      <ul>
+          <li><a href="/profile/{{user_profile}}"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
+          <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
+          <li><a href="/upload"><i class="fa-solid fa-plus"></i><span>Crea annuncio</span> </a></li>
+      </ul>
+      
+      
+     
+      <div class="left-side-nav">
+        <div class="header-avatar">
+          <a href="/profile/{{user_profile}}">
+            <div class="image-avatar">
+              <img  src="{{user_profile.profileimg.url}}" alt="">
+            </div>
+          </a>
+        </div>
+      </div>
+      {% else %}
+      <ul>
+        <li><a href="/signin"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
+        <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
+        <li><a href="/upload"><i class="fa-solid fa-plus"></i><span>Crea annuncio</span> </a></li>
+      </ul>
+    
+    
+      <a href="signin">login</a>
+      <div class="left-side-nav">
+        <div class="header-avatar">
+          <a href="">
+            <div class="image-avatar">
+              <img  src="{{user_profile.profileimg.url}}" alt="">
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endif %}
+    </nav>
+ </header>
+
+
+ {% else %}
+
+ <header>
+  <nav>
+    <div class="site-title">
+      <a href="/landing"><h1 class="logo"><span>Uni</span>Away</h1></a>
+    </div>
+    {% if user.is_authenticated %}
+    <ul>
+        <li><a href="/profile/{{user_profile}}"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
+        <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
+        
+    </ul>
+    
+    
+   
+    <div class="left-side-nav">
+      <div class="header-avatar">
+        <a href="/profile/{{user_profile}}">
+          <div class="image-avatar">
+            <img  src="{{user_profile.profileimg.url}}" alt="">
+          </div>
+        </a>
+      </div>
+    </div>
+    {% else %}
+    <ul>
+      <li><a href="/signin"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
+      <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
+    </ul>
+  
+  
+    <a href="signin">login</a>
+    <div class="left-side-nav">
+      <div class="header-avatar">
+        <a href="">
+          <div class="image-avatar">
+            <img  src="{{user_profile.profileimg.url}}" alt="">
+          </div>
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  </nav>
+</header>
+{% endif %}
+
+   
+ <section class="wrapper" >
+   <div class="container">
+      <h1 class="text-center">Trova il tuo appartamento</h1>
+      {% if user.is_authenticated %}
+      <form class="form-inline my-2 my-lg-0" action="posts_list_url">
+        {%csrf_token%}
+        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Esempio: Bilocale, Trilocale" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+      </form>
+      {% else %}
+      <form class="form-inline my-2 my-lg-0" action="host_index">
+        {%csrf_token%}
+        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Esempio: Bilocale, Trilocale" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+      </form>
+      {% endif %}
+      
+      <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4">
+          <div class="card">
+            
+            {% if post.postimage_set.first %}
+            <img src="{{post.postimage_set.first.images.url}}" class="card-img-top" alt="Apartment 1 Image 1">
+            {% else %}
+            <img src="\media\noimages.jpg" class="card-img-top" alt="Apartment 1 Image 1">
+            {% endif %}
+            <div class="card-body">
+              
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text">{{post.caption}}</p>
+              <div class="d-flex justify-content-between">
+                <span class="badge badge-primary">{{post.price}}£</span>
+                <span class="badge badge-secondary">{{post.position}}</span>
+                <span class="badge badge-third">{{post.created_at|date:"d-m-y"}}</span>
+                <a href="/post/{{post.id}}" class="btn btn-primary mt-2">Maggiori Dettagli</a>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+       {% endfor %}
+        <!-- more listings -->
+      </div>
+
+      <div class="pagination-container">
+        <div class="pagination">
+          {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}" class="page"><i class="fa-solid fa-angle-left"></i></a>
+          {% endif %}
+          
+          {% for num in posts.paginator.page_range %}
+            {% if posts.number == num %}
+              <a href="?page={{ num }}" class="page active">{{ num }}</a>
+            {% else %}
+              <a href="?page={{ num }}" class="page">{{ num }}</a>
+            {% endif %}
+          {% endfor %}
+          
+          {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}" class="page"><i class="fa-solid fa-angle-right"></i></a>
+          {% endif %}
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const pages = document.querySelectorAll(".page");
+
+        pages.forEach(function(page) {
+            page.addEventListener("click", function() {
+            pages.forEach(function(page) {
+                page.classList.remove("active");
+            });
+            
+            this.classList.add("active");
+            });
+        });
+        });
+      </script>
+      <!--<div class="pagination-container">
+        <ul class="pagination">
+          
+          <li class="previous">
+            <a href="?page={{ page_obj.previous_page_number }}">
+              <i class="fa-solid fa-angle-left"></i>Previous
+            </a>
+          </li>
+          
+          {% for page in paginator.page_range %}
+          <li><a href="?page={{page}}">{{page}}</a></li>
+          {% endfor %}
+          
+          <li class="next">
+            <a href="?page={{ page_obj.next_page_number }}">
+              Next <i class="fa-solid fa-angle-right"></i>
+            </a>
+          </li>
+          
+        </ul>
+      </div>-->
+    </div>
+    
+ </section>
+    
+    
+       
+       
+   
+
+
+ 
+ 
+    
+ </body>
+
+</html>
+

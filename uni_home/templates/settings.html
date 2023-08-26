@@ -1,0 +1,170 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/027fd7a33f.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/settings.css' %}">
+    <title>Setting</title>
+</head>
+<body>
+  <header>
+    <nav>
+      
+      {% if user.is_authenticated %}
+      <div class="site-title">
+        <a href="/"><h1 class="logo"><span>Uni</span>Away</h1></a>
+      </div>
+      {% else %}
+      <div class="site-title">
+        <a href="/"><h1 class="logo"><span>Uni</span>Away</h1></a>
+      </div>
+    {% endif %}
+    </nav>
+ </header>
+  <div class="container">
+    {% if user_profile.seller %}
+    <div class="wrapper">
+       <div class="title">
+          Impostazioni
+       </div>
+       <form action="seller_settings" method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+
+
+          
+         <div class="upload">
+          <img id="preview-image" src="{{user_profile.profileimg.url}}" width="150" height="150" alt="">
+          <div class="round">
+            <input id="image-input" type="file" name="image" value="">
+            <i class="fa fa-camera" style="color: #fff;"></i>
+          </div>
+        </div>
+
+
+
+       
+          <div class="field-container">
+            <div class="field-column">
+              <div class="field">
+                <input type="text" name="seller_name"   required>
+                <label>Inserzionista</label>
+              </div>
+              <div class="field">
+                <input type="tel" name="phone_number"  required>
+                <label> numero di telefono </label>
+              </div>
+            </div>
+            <div class="field-column">
+              <div class="field">
+                <input type="text" name="email"   required>
+                <label>Email </label>
+             </div>
+   
+             <div class="field-desc">
+               <textarea id="about" name="bio" area required  ></textarea >
+               <label>Biografia</label>
+            </div>
+
+            </div>
+            
+            
+          </div>
+          <div class="buttons-container">
+            <div class="button">
+              <a href="/"><input class="delete" type="button" value="Cancella"></a>
+            </div>
+            <div class="buttons">
+               <input type="submit" value="Salva">
+            </div>
+          </div>
+          
+       </form>
+    </div>
+    {% else %}
+
+    <div class="wrapper">
+      <div class="title">
+         Impostazioni
+      </div>
+      <form action="settings" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+         
+       <div class="upload">
+        <img id="preview-image" src="{{user_profile.profileimg.url}}" width="150" height="150" alt="">
+         <div class="round">
+          <input id="image-input" type="file" name="image" value="">
+           <i class = "fa fa-camera" style = "color: #fff;"></i>
+         </div>
+       </div>
+
+
+
+      
+         <div class="field-container">
+           <div class="field-column">
+              <div class="field">
+                <input type="text" name="name_surname"   required>
+                <label>nome e cognome </label>
+              </div>
+             <div class="field">
+               <input type="text" name="università"   required>
+               <label>La tua Università</label>
+             </div>
+             
+
+            </div>
+            <div class="field-column">
+              <div class="field">
+                <input type="text" name="location"  required>
+                <label>di dove sei? </label>
+              </div>
+  
+             <div class="field-desc">
+              <textarea id="about" name="bio" area required  ></textarea >
+              <label>Qualcosa su di te</label>
+             </div>
+
+            </div>
+           
+           
+         </div>
+         <div class="buttons-container">
+           <div class="button">
+             <a href="/"><input class="delete" type="button" value="Cancella"></a>
+           </div>
+           <div class="buttons">
+              <input type="submit" value="Salva">
+           </div>
+         </div>
+         
+      </form>
+   </div>
+   {% endif %}
+  </div>
+
+
+
+  <script>
+   const imageInput=document.getElementById('image-input')
+    const previewImage = document.getElementById('preview-image');
+  
+    imageInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+  
+      reader.onload = function(e) {
+        previewImage.src = e.target.result;
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  </script>
+ </body>
+</html>

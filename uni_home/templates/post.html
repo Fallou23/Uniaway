@@ -1,0 +1,130 @@
+
+{% load static %}
+
+<html>
+<head>
+	<title>post</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/027fd7a33f.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="{% static 'assets/css/post.css' %}">
+</head>
+<body>
+	
+		<div class="wrapper">
+			<div class="content">
+				
+				<div class="column">
+					
+					<div class="featured-center">
+						<img class="featured" id=featured src="{{photos.first.images.url }}"    >
+						
+					</div>
+					
+					<div id="slide-wrapper" >
+						
+						<img id="slideLeft" class="arrow" src="/static/assets/images/website_images/arrow-left.png">
+						
+		
+						<div id="slider">
+							{% for p in photos %}
+							<img class="thumbnail active"  src="{{p.images.url}}" >
+							{% endfor %}
+							
+						</div>
+		
+						<img id="slideRight" class="arrow" src="/static/assets/images/website_images/arrow-right.png">
+						
+					</div>
+				</div>
+		
+				<div class="post-content">
+					<div class="title-position">
+						<h1>{{ post.title }}</h1>
+						<strong>{{ post.position }}</strong>
+						
+					</div>
+					<hr>
+					<div class="price-caption">
+						<div class="price">
+							<h3>{{ post.price }}€</h3>
+							<h5>{{ post.created_at | date:"d-m-y"}}</h5>
+						</div>
+						<div class="description"><p>{{ post.caption }}</p>
+					</div>
+					
+					</div>
+					<div class="contact">
+						{% if user.is_authenticated %}
+						<div class="left-contact">
+							{% if post.phone_number %}
+							<div class="phone-number"><i class="fa-sharp fa-solid fa-phone"></i>+39{{post.phone_number}}</div>
+							{% else %}
+							<div class="phone-number"><i class="fa-sharp fa-solid fa-phone"></i> Nessun contatto inserito</div>
+							{% endif %}
+							{% if post.email %}
+							<div class="email"><i class="fa-solid fa-envelope"></i>{{ post.email}}</div>
+							{% else %}
+							<div class="email"><i class="fa-solid fa-envelope"></i> Nessuna email inserita</div>
+							{% endif %}
+						</div>
+						<div class="right-contact">
+							<a href="/profile/{{post.user}}"><h2>{{ post.user }}</h2></a>
+							<!--
+								<div class="header-avatar">
+								<a href="/profile/{{post.user}}">
+								  <div class="image-avatar">
+									<img  src="{{user_profile.profileimg.url}}" alt="">
+								  </div>
+								</a>
+							</div>
+						-->
+						</div>
+						{% else %}
+						<p><a href="/signup">Registrati</a> o <a href="/signin">Accedi</a> per contattare il venditore</p>
+						{% endif%}
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+
+	<script type="text/javascript">
+		let thumbnails = document.getElementsByClassName('thumbnail')
+
+		let activeImages = document.getElementsByClassName('active')
+
+		for (var i=0; i < thumbnails.length; i++){
+
+			thumbnails[i].addEventListener('mouseover', function(){
+				console.log(activeImages)
+				
+				if (activeImages.length > 0){
+					activeImages[0].classList.remove('active')
+				}
+				
+
+				this.classList.add('active')
+				document.getElementById('featured').src = this.src
+			})
+		}
+
+
+		let buttonRight = document.getElementById('slideRight');
+		let buttonLeft = document.getElementById('slideLeft');
+
+		buttonLeft.addEventListener('click', function(){
+			document.getElementById('slider').scrollLeft -= 180
+		})
+
+		buttonRight.addEventListener('click', function(){
+			document.getElementById('slider').scrollLeft += 180
+		})
+
+
+	</script>
+
+</body>
+</html>

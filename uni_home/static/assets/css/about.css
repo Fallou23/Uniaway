@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+
+
+
+
+
+
+
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  overflow-wrap: break-word;
+}
+
+
+
+
+:root{
+  --fs-title:2rem;
+  --fs-700: 2rem;
+  --fs-600: 1.7rem;
+  --fs-500: 1.2rem;
+  --fs-400: 1rem;
+}
+
+/**/
+@media (max-width: 1400px) {
+  :root{
+    --fs-title:1.3rem;
+    --fs-about-title:1.5rem;
+    --fs-900: 1.8rem;
+    --fs-800: 1.5rem;
+    --fs-700: 1.1rem;
+    --fs-600: 1.0rem;
+    --fs-550: 0.9rem;
+    --fs-500: 0.8rem;
+    --fs-400: 0.7rem;
+  }
+
+section{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+section .content{
+  
+  width: 100%;
+  border-radius:0 0 15px 15px ;
+  
+}
+
+section .image img{
+  border-radius:15px 15px 0px 0px 
+}
+section .content h2{
+  font-size: var(--fs-about-title);
+  margin-top: 0.5em;
+}
+
+section .content span{
+  margin: 0.5em 0;
+}
+section .content p{
+  font-size: var(--fs-700);
+  width: 90%;
+}
+
+}
+
+
+
+
+@media (max-width: 750px) {
+
+
+  :root{
+    --fs-title:1.3rem;
+    --fs-about-title:1.5rem;
+    --fs-900: 1.8rem;
+    --fs-800: 1.5rem;
+    --fs-700: 1.1rem;
+    --fs-600: 1.0rem;
+    --fs-550: 0.9rem;
+    --fs-500: 0.8rem;
+    --fs-400: 0.7rem;
+  }
+
+
+  section{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+section .content{
+  
+  width: 100%;
+  border-radius:0 0 15px 15px ;
+  
+}
+
+section .image img{
+  border-radius:15px 15px 0px 0px 
+}
+section .content h2{
+  font-size: var(--fs-about-title);
+  margin-top: 0.5em;
+}
+
+section .content span{
+  margin: 0.5em 0;
+}
+section .content p{
+  font-size: var(--fs-550);
+  width: 90%;
+}
+
+.content .links li{
+  border: 0.5px solid #777;
+  list-style: none;
+  border-radius: 5em;
+  padding: 0.5em 1.5em;
+  text-align: center;
+}
+
+.links li a{
+  font-size: var(--fs-500);
+  
+}
+
+
+
+}
+
+
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+body{
+    font-size: 1.125rem;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(to left top, #d8e0dc, #c2d5ce, #accbc2, #94c1b7, #7ab6ae);
+    
+  }
+
+
+
+section{
+    max-width: 80%;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2em;
+    box-shadow: 0px 33px 46px 13px rgba(0,0,0,0.1);
+}
+.image{
+  
+  
+  justify-content: center;
+  align-items: center;
+    
+}
+.image img{ 
+    border-radius:2em 0em 0em 2em ;
+    width: 100%;
+    height: 100%; /* Set the height to 100% to fill the container */
+    align-self: center;
+    object-fit: cover; /* Ensure the image fills the container without distortion */
+}
+.content{
+    background-image: linear-gradient(to left top, #d8e0dc, #c2d5ce, #accbc2, #94c1b7, #7ab6ae);
+    display: flex;
+    width: 100%;
+    padding: 1em 0 0 0;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0 2em 2em 0;
+    
+}
+
+.content h2{
+    text-transform: uppercase;
+    font-size: var(--fs-title);
+    letter-spacing: 0.15em;
+    opacity: 0.9;
+}
+.content span{
+    height: 0.2em;
+    width: 6em;
+    background: #7ab6ae;
+    margin: 2em 0;
+}
+.content p{
+    padding-bottom: 1.5em;
+    font-size: var(--fs-500);
+    font-weight: 300;
+    opacity: 0.7;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 1.7;
+    
+}
+.links{
+    margin: 1em 0;
+}
+.links li{
+    border: 0.5px solid #777;
+    list-style: none;
+    border-radius: 5em;
+    padding: 0.5em 2.5em;
+    text-align: center;
+}
+.links li a{
+    text-transform: uppercase;
+    color: #777;
+    text-decoration: none;
+}
+.links li:hover{
+    border-color: #7ab6ae;
+}
+.links li:hover a{
+    color :#7ab6ae;
+}
+.vertical-line{
+    height: 2em;
+    width: 0.09em;
+    background: #777;
+    margin: 0 auto;
+}
+.icons{
+    display: flex;
+    padding: 1em 0;
+}
+.icons li{
+    display: block;
+    padding: 0.35em;
+    margin: 0.2em;
+}
+.icons li i{
+    font-size: var(--fs-600);
+    opacity: 0.8;
+}
+.icons li i:hover{
+    color: #7ab6ae;
+}
+
+
+/*****************/
+/*
+@media(max-width: 750px){
+
+    
+  :root{
+    --fs-title:2.3rem;
+    --fs-about-title:1.5rem;
+    --fs-900: 1.8rem;
+    --fs-800: 1.5rem;
+    --fs-700: 1.1rem;
+    --fs-600: 1.0rem;
+    --fs-550: 0.9rem;
+    --fs-500: 0.8rem;
+    --fs-400: 0.7rem;
+  }
+  
+    section{
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    
+   
+    
+    
+    
+    .links li a{
+        font-size: var(--fs-500);
+    }
+    .links{
+        margin: 5px 0;
+    }
+    .links li{
+        padding: 0.4em 1.8em;
+    }
+    .icons li i{
+        font-size: var(--fs-550);
+    }
+}
+
+*/

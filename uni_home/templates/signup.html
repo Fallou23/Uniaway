@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/signup.css' %}">
+    <title>Signup</title>
+</head>
+<body>
+   <header>
+      <nav>
+        <div class="site-title">
+         <a href="landing"><h1 class="logo"><span>Uni</span>Away</h1></a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="wrapper">
+       <div class="title">
+          Registrati
+       </div>
+       <form action="" method="post">
+
+
+        {%csrf_token%}
+
+        <div>
+            <style>
+                h5{
+                    color: red;
+                }
+            </style>
+            {%for message in messages %}
+            <h5> {{message}} </h5>
+            {% endfor %}
+        </div>
+
+
+        <div class="field">
+         <input name="username"  type="text" required>
+         <label>Username </label>
+        </div>
+        <div class="field">
+         <input name="email" type="text" required>
+         <label>Email </label>
+        </div>
+        <div class="field">
+         <input name="password"  type="password" required>
+         <label>Password </label>
+        </div>
+        <div class="field">
+         <input name="password2" type="password" required>
+         <label>Conferma Password</label>
+        </div>
+
+
+        
+         <div class="content">
+            <!--
+            <div class="checkbox">
+               <input type="checkbox" id="remember-me">
+               <label for="remember-me">Ricordati di me</label>
+            </div>
+            -->
+
+            <div class="checkbox">
+               <input type="checkbox" id="seller" name="seller" >
+               <label for="seller">sono un venditore</label>
+            </div>
+            
+         </div>
+         <button type="submit" value="Crea account">Crea account</button>
+          
+       </form>
+    </div>
+ </body>
+</html>
