@@ -23,28 +23,31 @@ from django.conf import settings
 
 
 
-@login_required(login_url='signin')
+
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('host_landing')
+    else:
 
-    user_object=User.objects.get(username=request.user.username)
-    user_profile=Profile.objects.get(user=user_object)
+        user_object=User.objects.get(username=request.user.username)
+        user_profile=Profile.objects.get(user=user_object)
 
-    page=request.GET.get('page')
-    posts=Post.objects.all().order_by('-created_at')
-    paginator=Paginator(posts,6)
-    
-    
-    try:
+        page=request.GET.get('page')
+        posts=Post.objects.all().order_by('-created_at')
+        paginator=Paginator(posts,6)
         
-        posts=paginator.page(page)    
         
-    except PageNotAnInteger:
-        page=1
-        posts=paginator.page(page)
-        
-    except EmptyPage:
-        page=paginator.num_pages
-        posts=paginator.page(page)
+        try:
+            
+            posts=paginator.page(page)    
+            
+        except PageNotAnInteger:
+            page=1
+            posts=paginator.page(page)
+            
+        except EmptyPage:
+            page=paginator.num_pages
+            posts=paginator.page(page)
 
 
     return render(request, 'index.html', {'user_profile': user_profile, 'posts':posts,'paginator':paginator})
