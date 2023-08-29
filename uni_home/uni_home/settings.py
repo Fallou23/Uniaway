@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'uni_home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'Mynigga99',
-        'HOST': 'localhost',
+        'NAME': 'd4htagfve92st6',
+        'USER': 'jbwfoumnajjvlj',
+        'PASSWORD': '63ca5e16ad39b644dda7db7f04881b274a8ddaa94d2c452278627482d08d901e',
+        'HOST': 'ec2-54-78-142-10.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
         
     }
