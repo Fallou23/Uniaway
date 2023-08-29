@@ -1,4 +1,5 @@
 from operator import index
+from django.contrib import admin
 from django.urls import path
 from . import views
 from django.conf import settings
@@ -9,6 +10,7 @@ urlpatterns=[
     path('signup', views.signup, name='signup'),
     path('signin', views.signin, name='signin'),
     path('logout', views.logout, name='logout'),
+    path('admin',admin.site.urls),
     
     
     path('seller_settings', views.seller_settings, name='settings'),
