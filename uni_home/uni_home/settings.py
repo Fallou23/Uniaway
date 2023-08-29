@@ -86,6 +86,8 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'Mynigga99',
+        'HOST': 'uniaway-61bad5bc656e.herokuapp.com',
+        'PORT': '5432',
         
     }
 }
