@@ -149,7 +149,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 
 
-
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 AWS_ACCESS_KEY_ID = 'AKIA424VTZC4WH25LFSF'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'uniaway'
