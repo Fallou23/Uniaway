@@ -153,9 +153,10 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 AWS_ACCESS_KEY_ID = 'AKIA424VTZC4WH25LFSF'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'uniaway'
+AWS_S3_REGION_NAME = 'eu-west-3'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 
