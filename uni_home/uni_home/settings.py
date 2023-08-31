@@ -175,6 +175,6 @@ SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
 
 SECURE_SSL_REDIRECT=True
 
-
-
 LOGIN_URL='/host_landing/'
+
+print(DEBUG)
