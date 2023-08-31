@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import django_heroku
+
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,7 +137,7 @@ if DEBUG:
 else:
     STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
     
-django_heroku.settings(locals())
+
 
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
