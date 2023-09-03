@@ -51,18 +51,15 @@ def index(request):
             page=paginator.num_pages
             posts=paginator.page(page)
         
-        post_image_urls = {}
         for post in posts:
             # Retrieve all associated images for the post
             post_images = PostImage.objects.filter(post=post)
             
             # Store the image URLs in the dictionary
             image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
-            post_image_urls[post.id] = image_urls
 
-    print(profile_url)
 
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts':posts,'paginator':paginator, 'profile_url': profile_url})
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts':posts,'paginator':paginator, 'profile_url': profile_url, 'post_image_urls': image_urls})
  
  
  
@@ -71,6 +68,17 @@ def host_index(request):
     page=request.GET.get('page')
     posts=Post.objects.all().order_by('-created_at')
     paginator=Paginator(posts,6)
+    user_profile = Profile(user=request.user)
+
+    profile_url =  get_s3_presigned_url(user_profile.profileimg.url)
+    for post in posts:
+            # Retrieve all associated images for the post
+            post_images = PostImage.objects.filter(post=post)
+            
+            # Store the image URLs in the dictionary
+            image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+
+
     
     
     try:
@@ -86,7 +94,7 @@ def host_index(request):
         posts=paginator.page(page)
 
 
-    return render(request, 'index.html', {'posts':posts,'paginator':paginator})
+    return render(request, 'index.html', {'posts':posts,'paginator':paginator, 'profile_url': profile_url,'post_image_urls': image_urls })
  
  
 def landing(request):
@@ -94,10 +102,11 @@ def landing(request):
     
     user_object=User.objects.get(username=request.user.username)
     user_profile=Profile.objects.get(user=user_object)
+    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
     posts=Post.objects.all()
     
     
-    return render(request, 'landing.html',{'user_profile': user_profile,'posts':posts,"user_object":user_object})
+    return render(request, 'landing.html',{'user_profile': user_profile,'posts':posts,"user_object":user_object, "profile_url": profile_url})
 
 def host_landing(request):
     return render(request,'landing.html')
@@ -183,6 +192,7 @@ def settings(request):
 
 
     user_profile=Profile.objects.get(user=request.user)
+    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
 
 
     if request.method=='POST':
@@ -220,7 +230,7 @@ def settings(request):
 
 
 
-    return render(request, 'settings.html', {'user_profile':user_profile})
+    return render(request, 'settings.html', {'user_profile':user_profile, 'profile_url': profile_url})
 
 
 
@@ -232,6 +242,7 @@ def seller_settings(request):
 
 
     user_profile=Profile.objects.get(user=request.user)
+    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
 
 
     if request.method=='POST':
@@ -269,7 +280,7 @@ def seller_settings(request):
 
 
 
-    return render(request, 'settings.html', {'user_profile':user_profile})
+    return render(request, 'settings.html', {'user_profile':user_profile, "profile_url": profile_url})
 
 
 @login_required(login_url='signin')
@@ -313,10 +324,9 @@ def upload(request):
 @login_required(login_url='signin')
 def update(request):
 
-
-    
-
     user_profile=Profile.objects.get(user=request.user)
+
+    profile_url =  get_s3_presigned_url(user_profile.profileimg.url)
 
 
     if request.method=='POST':
@@ -350,21 +360,23 @@ def update(request):
             user_profile.save()
 
         return redirect('profile')
+
     
     
-    return render(request,'profile.html', {'user_profile':user_profile})
+    return render(request,'profile.html', {'user_profile':user_profile, "profile_url": profile_url})
 
 
 
 
 def delete_post(request,pk):
         user_profile=Profile.objects.get(user=request.user)
+        profile_url = get_s3_presigned_url(user_profile.profileimg.url)
         post=Post.objects.filter(id=pk)
         if request.method=='POST':
             post.delete()
             return redirect('/')
         
-        return render(request,'profile.html',{'post':post,'user_profile':user_profile})
+        return render(request,'profile.html',{'post':post,'user_profile':user_profile, 'profile_url': profile_url})
 
 
 
@@ -378,6 +390,8 @@ def profile(request,pk):
     user_object=User.objects.get(username=pk)
     user_profile=Profile.objects.get(user=user_object)
     user_posts=Post.objects.filter(user=pk)
+
+    image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in user_posts]
     
    
     
@@ -386,6 +400,8 @@ def profile(request,pk):
         'user_object':user_object,
         'user_profile':user_profile,
         'user_posts':user_posts,
+        'user_photos':image_urls,
+        'profile_url': get_s3_presigned_url(user_profile.profileimg.url)
     }
 
    
@@ -394,18 +410,14 @@ def profile(request,pk):
 
 
 def post(request,pk):
-
-        
-       """ 
        user_profile=Profile.objects.get(user=request.user)
-       """
        post=get_object_or_404(Post,id=pk)
        photos = PostImage.objects.filter(post=post)
-        
-        
+       image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in photos]
        context={
         'post':post,
-        'photos':photos,
+        'photos':image_urls,
+        'profile_url': get_s3_presigned_url(user_profile.profileimg.url)
         
         
         }
@@ -423,13 +435,22 @@ def post(request,pk):
 def posts_list_url(request):
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
+    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
     posts=Post.objects.all()
     search_query= request.GET.get('search','')
+    for post in posts:
+            # Retrieve all associated images for the post
+            post_images = PostImage.objects.filter(post=post)
+            
+            # Store the image URLs in the dictionary
+            image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+
+
     if search_query:
         posts=Post.objects.filter(Q(title__icontains=search_query) | Q(position__icontains=search_query ))
     else:
         posts=Post.objects.all()
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts': posts})
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts': posts,"profile_url": profile_url,'post_image_urls': image_urls })
 
 
 def about(request):

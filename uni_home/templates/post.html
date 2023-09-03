@@ -25,9 +25,11 @@
                         <img
                             class="featured"
                             id="featured"
-                            src="{{photos.first.images.url }}"
+                            src="{{photos.0}}"
                         />
                     </div>
+                    {% for photo_url in photos %} {{ photo_url }}<br />
+                    {% endfor %}
 
                     <div id="slide-wrapper">
                         <img
@@ -38,10 +40,7 @@
 
                         <div id="slider">
                             {% for p in photos %}
-                            <img
-                                class="thumbnail active"
-                                src="{{p.images.url}}"
-                            />
+                            <img class="thumbnail active" src="{{p}}" />
                             {% endfor %}
                         </div>
 
@@ -124,8 +123,6 @@
 
             for (var i = 0; i < thumbnails.length; i++) {
                 thumbnails[i].addEventListener("mouseover", function () {
-                    console.log(activeImages);
-
                     if (activeImages.length > 0) {
                         activeImages[0].classList.remove("active");
                     }

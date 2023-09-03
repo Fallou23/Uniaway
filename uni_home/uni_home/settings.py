@@ -137,6 +137,10 @@ USE_TZ = True
 # else:
 #     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
+STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
+MEDIA_URL = 'https://uniaway.s3.amazonaws.com/media/'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
@@ -148,7 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # media file 
     
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -179,6 +183,6 @@ AWS_STORAGE_BUCKET_NAME = 'uniaway'
 AWS_S3_SIGNATURE_NAME = 's3v4',
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL =  'public-read'
+AWS_DEFAULT_ACL =  None
 AWS_S3_VERITY = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

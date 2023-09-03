@@ -1,101 +1,126 @@
 {% load static %}
 
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'assets/css/upload.css' %}">
-    <title>test</title>
-</head>
-<body>
-   <header>
-      <nav>
-        <div class="site-title">
-          <h1 class="logo"><span>Uni</span>Away</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'assets/css/upload.css' %}" />
+        <title>test</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="site-title">
+                    <h1 class="logo"><span>Uni</span>Away</h1>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="wrapper">
+                <div class="title">Crea il tuo annuncio</div>
+                <form
+                    action="upload"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
+                    {%csrf_token%}
+                    <form action="">
+                        <div id="addImgBox"></div>
+                        <div class="upload-button">
+                            <label for="fileInput" class="upload-button-label">
+                                Scegli immagini
+                            </label>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                name="image"
+                                value="{{ post.image }}"
+                                multiple
+                                onchange="previewImages()"
+                            />
+                        </div>
+                        <div class="image-preview" id="imagePreview"></div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                name="title"
+                                value="{{post.title}}"
+                                required
+                            />
+                            <label>titolo</label>
+                        </div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                name="position"
+                                value="{{post.position}}"
+                                required
+                            />
+                            <label>position</label>
+                        </div>
+                        <div class="field">
+                            <input
+                                type="number"
+                                name="price"
+                                value="{{post.price}}"
+                                required
+                            />
+                            <label>price</label>
+                        </div>
+                        <div class="field">
+                            <input
+                                type="number"
+                                name="phone_number"
+                                value="{{post.phone_number}}"
+                            />
+                            <label>Numero di telefono </label>
+                        </div>
+                        <div class="field">
+                            <input
+                                type="email"
+                                name="email"
+                                value="{{post.email}}"
+                            />
+                            <label>email</label>
+                        </div>
+                        <div class="field-desc">
+                            <textarea
+                                name="caption"
+                                id="caption"
+                                area
+                                required
+                            ></textarea>
+                            <label>descrizione</label>
+                        </div>
+                        <div class="field">
+                            <input type="submit" value="Pubblica" />
+                        </div>
+                    </form>
+                </form>
+            </div>
         </div>
-      </nav>
-    </header>
-    <div class="container">
+        <script>
+            function previewImages() {
+                var preview = document.getElementById("imagePreview");
+                var files = document.getElementById("fileInput").files;
 
-      <div class="wrapper">
-         <div class="title">
-            Crea il tuo annuncio
-         </div>
-         <form action="upload" method="post" enctype="multipart/form-data">
-            {%csrf_token%}
-            <form action="">
-               <div id="addImgBox">
-               </div>  
-               <div class="upload-button">
-                  <label for="fileInput" class="upload-button-label">
-                       Scegli immagini
-                  </label>
-                  <input id="fileInput" type="file" name="image" value="{{ post.image }}" multiple onchange="previewImages()">
-              </div>
-               <div class="image-preview" id="imagePreview"></div>
-               <div class="field">
-                  <input type="text" name="title"  value="{{post.title}}" required>
-                  <label>titolo</label>
-               </div>
-               <div class="field">
-                  <input type="text" name="position"  value="{{post.position}}" required>
-                  <label>position</label>
-               </div>
-               <div class="field">
-                  <input type="number" name="price"  value="{{post.price}}" required>
-                  <label>price</label>
-               </div>
-               <div class="field">
-                  <input type="number" name="phone_number"  value="{{post.phone_number}}" >
-                  <label>Numero di telefono </label>
-               </div>
-               <div class="field">
-                  <input type="email" name="email"  value="{{post.email}}" >
-                  <label>email</label>
-               </div>
-               <div class="field-desc">
-                  <textarea name="caption" id="caption" area required></textarea>
-                  <label>descrizione</label>
-               </div>
-               <div class="field">
-                  <input type="submit" value="Pubblica">
-               </div>
+                preview.innerHTML = "";
 
-            </form>
-            
-            
-            
-         </form>
-      </div>
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var reader = new FileReader();
 
-    </div>
-    <script>
-      function previewImages() {
-        var preview = document.getElementById('imagePreview');
-        var files = document.getElementById('fileInput').files;
-      
-        preview.innerHTML = '';
-      
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          var reader = new FileReader();
-      
-          reader.onload = function(e) {
-            var img = document.createElement('img');
-            img.src = e.target.result;
-            preview.appendChild(img);
-          };
-      
-          reader.readAsDataURL(file);
-        }
-      }
-      </script>
+                    reader.onload = function (e) {
+                        var img = document.createElement("img");
+                        img.src = e.target.result;
+                        preview.appendChild(img);
+                    };
 
-
-   
- </body>
+                    reader.readAsDataURL(file);
+                }
+            }
+        </script>
+    </body>
 </html>

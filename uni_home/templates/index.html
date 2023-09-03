@@ -62,10 +62,7 @@
                     <div class="header-avatar">
                         <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
-                                <img
-                                    src="{{user_profile.profileimg.url}}"
-                                    alt=""
-                                />
+                                <img src="{{profile_url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -97,10 +94,7 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
-                                <img
-                                    src="{{user_profile.profileimg.url}}"
-                                    alt=""
-                                />
+                                <img src="{{profile_url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -123,7 +117,7 @@
                     <li>
                         <a href="/profile/{{user_profile}}"
                             ><i class="fa-solid fa-user"></i
-                            ><span>Profilo</span>
+                            ><span>Profilo </span>
                         </a>
                     </li>
                     <li>
@@ -138,10 +132,7 @@
                     <div class="header-avatar">
                         <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
-                                <img
-                                    src="{{user_profile.profileimg.url}}"
-                                    alt=""
-                                />
+                                <img src="{{profile_url}}" alt="profile" />
                             </div>
                         </a>
                     </div>
@@ -167,10 +158,7 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
-                                <img
-                                    src="{{user_profile.profileimg.url}}"
-                                    alt=""
-                                />
+                                <img src="{{profile_url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -226,7 +214,7 @@
                             {% if post.postimage_set.first %}
 
                             <img
-                                src="{{post.postimage_set.first.images.url}}"
+                                src="{{post_images.0}}"
                                 class="card-img-top"
                                 alt="Apartment 1 Image 1"
                             />
