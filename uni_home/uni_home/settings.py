@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9nor@w)_1#3d!p2-sph+9zx^z2@=+4mdp$x-de#(n5#jy=de9v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','uniaway-61bad5bc656e.herokuapp.com','127.0.0.1','www.uniaway.it','uniaway.it']
 
@@ -90,7 +90,6 @@ DATABASES = {
         'PASSWORD': '63ca5e16ad39b644dda7db7f04881b274a8ddaa94d2c452278627482d08d901e',
         'HOST': 'ec2-54-78-142-10.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
-        
     }
 }
 
@@ -170,11 +169,9 @@ EMAIL_USE_SSL = False
 
 
 
-SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
+# SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
 
 
-SECURE_SSL_REDIRECT=True
+# SECURE_SSL_REDIRECT=True
 
 LOGIN_URL='/host_landing/'
-
-print(DEBUG)
