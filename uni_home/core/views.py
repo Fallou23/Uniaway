@@ -15,6 +15,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.core.mail import send_mail
 from django.conf import settings
+from .presign import get_s3_presigned_url
 
 
 
@@ -31,6 +32,7 @@ def index(request):
 
         user_object=User.objects.get(username=request.user.username)
         user_profile=Profile.objects.get(user=user_object)
+        profile_url =  get_s3_presigned_url(user_profile.profileimg.url)
 
         page=request.GET.get('page')
         posts=Post.objects.all().order_by('-created_at')
@@ -48,9 +50,19 @@ def index(request):
         except EmptyPage:
             page=paginator.num_pages
             posts=paginator.page(page)
+        
+        post_image_urls = {}
+        for post in posts:
+            # Retrieve all associated images for the post
+            post_images = PostImage.objects.filter(post=post)
+            
+            # Store the image URLs in the dictionary
+            image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+            post_image_urls[post.id] = image_urls
 
+    print(profile_url)
 
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts':posts,'paginator':paginator})
+    return render(request, 'index.html', {'user_profile': user_profile, 'posts':posts,'paginator':paginator, 'profile_url': profile_url})
  
  
  
