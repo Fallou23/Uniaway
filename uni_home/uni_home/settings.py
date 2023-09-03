@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9nor@w)_1#3d!p2-sph+9zx^z2@=+4mdp$x-de#(n5#jy=de9v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','uniaway-61bad5bc656e.herokuapp.com','127.0.0.1','www.uniaway.it','uniaway.it',  'a35c-2a02-8070-8a85-ff40-00-1d70.ngrok-free.app']
+ALLOWED_HOSTS = ['localhost','uniaway-61bad5bc656e.herokuapp.com','127.0.0.1','www.uniaway.it','uniaway.it',]
 
 
 # Application definition
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -141,7 +141,6 @@ USE_TZ = True
 STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
 MEDIA_URL = 'https://uniaway.s3.amazonaws.com/media/'
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -169,10 +168,8 @@ EMAIL_USE_SSL = False
 
 
 
-# SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
-
-
-# SECURE_SSL_REDIRECT=True
+SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
+SECURE_SSL_REDIRECT=True
 
 LOGIN_URL='/host_landing/'
 
