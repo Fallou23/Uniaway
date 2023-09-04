@@ -27,7 +27,13 @@ SECRET_KEY = 'django-insecure-9nor@w)_1#3d!p2-sph+9zx^z2@=+4mdp$x-de#(n5#jy=de9v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','uniaway-61bad5bc656e.herokuapp.com','127.0.0.1','www.uniaway.it','uniaway.it',]
+ALLOWED_HOSTS = [
+    'localhost',
+    'uniaway-61bad5bc656e.herokuapp.com',
+    '127.0.0.1',
+    'www.uniaway.it',
+    'uniaway.it',
+]
 
 
 # Application definition
@@ -42,8 +48,8 @@ INSTALLED_APPS = [
     'core',
     'phonenumber_field',
     'storages'
-    
-    
+
+
 
 ]
 
@@ -64,7 +70,7 @@ ROOT_URLCONF = 'uni_home.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -145,16 +151,15 @@ STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# media file 
-    
-# MEDIA_URL = '/media/'
+# media file
 
+# MEDIA_URL = '/media/'
 
 
 # gmail config
@@ -168,11 +173,10 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
-SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
-SECURE_SSL_REDIRECT=True
-
-LOGIN_URL='/host_landing/'
+LOGIN_URL = '/host_landing/'
 
 
 AWS_ACCESS_KEY_ID = 'AKIA424VTZC4VPHHGQGE'
@@ -181,7 +185,7 @@ AWS_STORAGE_BUCKET_NAME = 'uniaway'
 AWS_S3_SIGNATURE_NAME = 's3v4'
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL =  None
+AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
