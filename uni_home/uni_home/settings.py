@@ -138,9 +138,11 @@ USE_TZ = True
 #     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
 MEDIA_URL = 'https://uniaway.s3.amazonaws.com/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -152,7 +154,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # media file 
     
 # MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
