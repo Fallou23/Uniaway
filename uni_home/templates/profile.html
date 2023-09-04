@@ -2,35 +2,41 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}" />
 
-  
+        <script
+            src="https://kit.fontawesome.com/027fd7a33f.js"
+            crossorigin="anonymous"
+        ></script>
 
-    <script src="https://kit.fontawesome.com/027fd7a33f.js" crossorigin="anonymous"></script>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        />
+        <title>Document</title>
+    </head>
+    <body>
+        {% if user_profile.seller %}
+        <header>
+            <nav>
+                <div class="site-title">
+                    <a href="/landing"
+                        ><h1 class="logo"><span>Uni</span>Away</h1></a
+                    >
+                </div>
+                {% if user.is_authenticated %}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <title>Document</title>
-</head>
-<body>
-
-
-
-
-
-  {% if user_profile.seller %}
-  <header>
-    <nav>
-      <div class="site-title">
-        <a href="/landing"><h1 class="logo"><span>Uni</span>Away</h1></a>
-      </div>
-      {% if user.is_authenticated %}
-      
-      <!--<ul>
+                <!--<ul>
           <li><a href="/profile/{{user_profile}}"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
           <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
           <li><a href="/upload"><i class="fa-solid fa-plus"></i><span>Crea annuncio</span> </a></li>
@@ -49,12 +55,9 @@
         </div>
       </div>-->
 
+                {% else %}
 
-    
-      {% else %}
-
-      
-      <!--<ul>
+                <!--<ul>
         <li><a href="/signin"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
         <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
         <li><a href="/upload"><i class="fa-solid fa-plus"></i><span>Crea annuncio</span> </a></li>
@@ -73,248 +76,300 @@
         </div>
       </div>
     -->
-    {% endif %}
-  
-    
-    </nav>
- </header>
+                {% endif %}
+            </nav>
+        </header>
 
+        {% else %}
 
- {% else %}
-
- <header>
-  <nav>
-    <div class="site-title">
-      <a href="/landing"><h1 class="logo"><span>Uni</span>Away</h1></a>
-    </div>
-    {% if user.is_authenticated %}
-    <ul>
-        <li><a href="/profile/{{user_profile}}"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
-        <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
-        <li><a  href="/logout"><i class="fa-solid fa-right-from-bracket"></i> <span class="logout-btn">Logout</span> </a></li>
-    </ul>
-    
-    
-   
-    <div class="left-side-nav">
-      <div class="header-avatar">
-        <a href="/profile/{{user_profile}}">
-          <div class="image-avatar">
-            <img  src="{{user_profile.profileimg.url}}" alt="">
-          </div>
-        </a>
-      </div>
-    </div>
-    {% else %}
-    <ul>
-      <li><a href="/signin"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
-      <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
-    </ul>
-  
-  
-    <a href="signin">login</a>
-    <div class="left-side-nav">
-      <div class="header-avatar">
-        <a href="">
-          <div class="image-avatar">
-            <img  src="{{user_profile.profileimg.url}}" alt="">
-          </div>
-        </a>
-      </div>
-    </div>
-  {% endif %}
-  </nav>
-</header>
-{% endif %}
-
-
-
-
-
-
-
-
-
-      {% if user_profile.seller %}
-      <div class="wrapper">
-
-      <section class="first-section">
-        <div class="title">
-          Profilo
-        </div>
-        <div class="container">
-        <form class="first-section-form" action="profile" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-
-          <div class="upload">
-            <img src="{{user_profile.profileimg.url}}" width = 150 height = 150 alt="">
-            
-          </div>
-          
-            <div class="container-field">
-              <div class="left-side">
-                  <div class="field">
-                      <p>Venditore</p>
-                      <label>{{user_profile.seller_name|default_if_none:''}} </label>
-                   </div>
-                   <div class="field">
-                     <p>il nostro numero di telefono </p>
-                     <label>{{user_profile.phone_number}}</label>
-                   </div>
-                   <div class="field">
-                    <p>la nostra Email</p>
-                    <label>{{user_profile.email}}</label>
-                  </div>
-                  
-              </div>
-              
-
-
-              <div class="field-desc">
-                <div class="bio" name="bio"  id="" > {{user_profile.bio}}</div>
-                <label> Descrizione</label>
-              </div>
-          
-          </div>
-          {% if user == user_profile.user %}
-          <a  href="/logout"><i class="fa-solid fa-right-from-bracket"></i> <span class="logout-btn">Logout</span> </a>
-          {% endif%}
-        </form>
-        
-        </div>
-        <section class="second-section">
-          <div class="second-container">
-            <div class="container-a">
-              <div class="row">
-                {% for post in user_posts %}
-                
-                <div class="col-md-4">
-                  <div class="card">
-                    {% if post.postimage_set.first %}
-                    <img src="{{post.postimage_set.first.images.url}}" class="card-img-top" alt="ApartmentImage ">
-                    {% else %}
-                    <img src="\media\noimages.jpg" class="card-img-top" alt="ApartmentImage ">
-                    {% endif %}
-                    <div class="card-body">
-                      {% if user == user_profile.user %}
-                      <div class="delete">
-                        <div id="ellipsis">
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </div>
-                      </div>
-                      {% endif %}
-                      <h5 class="card-title">{{post.title}}</h5>
-                      <p class="card-text">{{post.caption}}</p>
-                      <div class="d-flex justify-content-between">
-                        <span class="badge badge-primary">{{post.price}}£</span>
-                        <span class="badge badge-secondary">{{post.position}}</span>
-                        <a href="/post/{{post.id}}" class="btn btn-primary mt-2">More details</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div id="popup-{{ post.id }}" class="popup">
-                    <div class="popup-content">
-                      <button id="selled-btn-{{ post.id }}" class="selled-btn">venduto</button>
-                      <form action="/delete_post/{{post.id}}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Elimina</button>
-                      </form>
-                      <button id="close-btn-{{ post.id }}" class="close-btn">Chiudi</button>
-                    </div>
-                  </div>
+        <header>
+            <nav>
+                <div class="site-title">
+                    <a href="/landing"
+                        ><h1 class="logo"><span>Uni</span>Away</h1></a
+                    >
                 </div>
-                {% empty %}
-                <h1>Ancora nessun annuncio!</h1>
-                {% endfor %}
-                <!-- more listings -->
-              </div>
-              
-            </div>
-      
-      
-      
-          
-      
-          </div>
-          
-        </section>
-      </section>
-   </div>  
-             
+                {% if user.is_authenticated %}
+                <ul>
+                    <li>
+                        <a href="/profile/{{user_profile}}"
+                            ><i class="fa-solid fa-user"></i
+                            ><span>Profilo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/settings"
+                            ><i class="fa-solid fa-sliders"></i>
+                            <span>Impostazioni</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout"
+                            ><i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="logout-btn">Logout</span>
+                        </a>
+                    </li>
+                </ul>
 
-              
-              
-    {% else %}
+                <div class="left-side-nav">
+                    <div class="header-avatar">
+                        <a href="/profile/{{user_profile}}">
+                            <div class="image-avatar">
+                                <img src="{{profile_url}}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <ul>
+                    <li>
+                        <a href="/signin"
+                            ><i class="fa-solid fa-user"></i
+                            ><span>Profilo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/settings"
+                            ><i class="fa-solid fa-sliders"></i>
+                            <span>Impostazioni</span>
+                        </a>
+                    </li>
+                </ul>
 
+                <a href="signin">login</a>
+                <div class="left-side-nav">
+                    <div class="header-avatar">
+                        <a href="">
+                            <div class="image-avatar">
+                                <img src="{{profile_url}}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </nav>
+        </header>
+        {% endif %} {% if user_profile.seller %}
+        <div class="wrapper">
+            <section class="first-section">
+                <div class="title">Profilo</div>
+                <div class="container">
+                    <form
+                        class="first-section-form"
+                        action="profile"
+                        method="post"
+                        enctype="multipart/form-data"
+                    >
+                        {% csrf_token %}
 
+                        <div class="upload">
+                            <img
+                                src="{{profile_url}}"
+                                width="150"
+                                height="150"
+                                alt=""
+                            />
+                        </div>
 
-    <div class="wrapper-student">
-      <section class="first-section-student">
-        
-        <div class="container-student">
-          <div class="title">
-            Profilo
-          </div>
-         <form class="first-section-student" action="profile" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
+                        <div class="container-field">
+                            <div class="left-side">
+                                <div class="field">
+                                    <p>Venditore</p>
+                                    <label
+                                        >{{user_profile.seller_name|default_if_none:''}}
+                                    </label>
+                                </div>
+                                <div class="field">
+                                    <p>il nostro numero di telefono</p>
+                                    <label>{{user_profile.phone_number}}</label>
+                                </div>
+                                <div class="field">
+                                    <p>la nostra Email</p>
+                                    <label>{{user_profile.email}}</label>
+                                </div>
+                            </div>
 
-          <div class="upload">
-            <img src="{{user_profile.profileimg.url}}" width = 150 height = 150 alt="">
-          </div>
-          
-            <div class="container-field">
-              <div class="left-side">
-                  <div class="field">
-                      <p>nome e cognome</p>
-                      <label>{{user_profile.name_surname|default_if_none:''}} </label>
-                   </div>
-                  
-                  
-              </div>
-              <div class="rigth-side">
-                  
-                   <div class="field">
-                    <p>di dove sei?</p>
-                    <label>{{user_profile.location}}</label>
-                   </div>
-                   <div class="field">
-                     <p>università</p>
-                     <label>{{user_profile.università}}</label>
-                  </div>
-              </div>
+                            <div class="field-desc">
+                                <div class="bio" name="bio" id="">
+                                    {{user_profile.bio}}
+                                </div>
+                                <label> Descrizione</label>
+                            </div>
+                        </div>
+                        {% if user == user_profile.user %}
+                        <a href="/logout"
+                            ><i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="logout-btn">Logout</span>
+                        </a>
+                        {% endif%}
+                    </form>
+                </div>
+                <section class="second-section">
+                    <div class="second-container">
+                        <div class="container-a">
+                            <div class="row">
+                                {% for post in user_posts %}
 
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        {% if post.postimage_set.first %}
+                                        <img
+                                            src="{{user_photos.0}}"
+                                            class="card-img-top"
+                                            alt="ApartmentImage "
+                                        />
+                                        {% else %}
+                                        <img
+                                            src="\media\noimages.jpg"
+                                            class="card-img-top"
+                                            alt="ApartmentImage "
+                                        />
+                                        {% endif %}
+                                        <div class="card-body">
+                                            {% if user == user_profile.user %}
+                                            <div class="delete">
+                                                <div id="ellipsis">
+                                                    <i
+                                                        class="fa-solid fa-ellipsis-vertical"
+                                                    ></i>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            <h5 class="card-title">
+                                                {{post.title}}
+                                            </h5>
+                                            <p class="card-text">
+                                                {{post.caption}}
+                                            </p>
+                                            <div
+                                                class="d-flex justify-content-between"
+                                            >
+                                                <span
+                                                    class="badge badge-primary"
+                                                    >{{post.price}}£</span
+                                                >
+                                                <span
+                                                    class="badge badge-secondary"
+                                                    >{{post.position}}</span
+                                                >
+                                                <a
+                                                    href="/post/{{post.id}}"
+                                                    class="btn btn-primary mt-2"
+                                                    >More details</a
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
 
-              <div class="field-desc">
-                <div class="bio" name="bio"  id="" > {{user_profile.bio}}</div>
-                <label> Descrizione</label>
-              </div>
-              
-          </div>
-        </form>
+                                    <div id="popup-{{ post.id }}" class="popup">
+                                        <div class="popup-content">
+                                            <button
+                                                id="selled-btn-{{ post.id }}"
+                                                class="selled-btn"
+                                            >
+                                                venduto
+                                            </button>
+                                            <form
+                                                action="/delete_post/{{post.id}}"
+                                                method="post"
+                                            >
+                                                {% csrf_token %}
+                                                <button type="submit">
+                                                    Elimina
+                                                </button>
+                                            </form>
+                                            <button
+                                                id="close-btn-{{ post.id }}"
+                                                class="close-btn"
+                                            >
+                                                Chiudi
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <h1>Ancora nessun annuncio!</h1>
+                                {% endfor %}
+                                <!-- more listings -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
         </div>
-      </section>
-    </div>
-      {% endif %}
-     
-    
-    <script>
-      const ellipses = document.querySelectorAll('.fa-ellipsis-vertical');
-      const popups = document.querySelectorAll('.popup');
-      const closeBtns = document.querySelectorAll('.close-btn');
-    
-      ellipses.forEach((ellipsis, index) => {
-        ellipsis.addEventListener('click', () => {
-          popups[index].classList.add('show-popup');
-        });
-      });
-    
-      closeBtns.forEach((closeBtn, index) => {
-        closeBtn.addEventListener('click', () => {
-          popups[index].classList.remove('show-popup');
-        });
-      });
-    </script>
-    
-</body>
+
+        {% else %}
+
+        <div class="wrapper-student">
+            <section class="first-section-student">
+                <div class="container-student">
+                    <div class="title">Profilio</div>
+                    <form
+                        class="first-section-student"
+                        action="profile"
+                        method="post"
+                        enctype="multipart/form-data"
+                    >
+                        {% csrf_token %}
+
+                        <div class="upload">
+                            <img
+                                src="{{profile_url}}"
+                                width="150"
+                                height="150"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="container-field">
+                            <div class="left-side">
+                                <div class="field">
+                                    <p>nome e cognome</p>
+                                    <label
+                                        >{{user_profile.name_surname|default_if_none:''}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="rigth-side">
+                                <div class="field">
+                                    <p>di dove sei?</p>
+                                    <label>{{user_profile.location}}</label>
+                                </div>
+                                <div class="field">
+                                    <p>università</p>
+                                    <label>{{user_profile.università}}</label>
+                                </div>
+                            </div>
+
+                            <div class="field-desc">
+                                <div class="bio" name="bio" id="">
+                                    {{user_profile.bio}}
+                                </div>
+                                <label> Descrizione</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        {% endif %}
+
+        <script>
+            const ellipses = document.querySelectorAll(".fa-ellipsis-vertical");
+            const popups = document.querySelectorAll(".popup");
+            const closeBtns = document.querySelectorAll(".close-btn");
+
+            ellipses.forEach((ellipsis, index) => {
+                ellipsis.addEventListener("click", () => {
+                    popups[index].classList.add("show-popup");
+                });
+            });
+
+            closeBtns.forEach((closeBtn, index) => {
+                closeBtn.addEventListener("click", () => {
+                    popups[index].classList.remove("show-popup");
+                });
+            });
+        </script>
+    </body>
 </html>

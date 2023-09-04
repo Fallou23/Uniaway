@@ -27,7 +27,13 @@ SECRET_KEY = 'django-insecure-9nor@w)_1#3d!p2-sph+9zx^z2@=+4mdp$x-de#(n5#jy=de9v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','uniaway-61bad5bc656e.herokuapp.com','127.0.0.1','www.uniaway.it','uniaway.it']
+ALLOWED_HOSTS = [
+    'localhost',
+    'uniaway-61bad5bc656e.herokuapp.com',
+    '127.0.0.1',
+    'www.uniaway.it',
+    'uniaway.it',
+]
 
 
 # Application definition
@@ -41,8 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'phonenumber_field',
-    
-    
+    'storages'
+
+
 
 ]
 
@@ -63,7 +70,7 @@ ROOT_URLCONF = 'uni_home.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,33 +135,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-if DEBUG:
-    STATICFILES_DIRS=(
-        os.path.join(BASE_DIR, 'static'),
-        )
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    
+# STATIC_URL = 'static/'
+# if DEBUG:
+#     STATICFILES_DIRS=(
+#         os.path.join(BASE_DIR, 'static'),
+#         )
+# else:
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+MEDIA_URL = 'https://uniaway.s3.amazonaws.com/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# media file 
+# media file
 
-MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-
-
-
-
-
-
-
+# MEDIA_URL = '/media/'
 
 
 # gmail config
@@ -168,10 +173,19 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
-# SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
+LOGIN_URL = '/host_landing/'
 
 
-# SECURE_SSL_REDIRECT=True
-
-LOGIN_URL='/host_landing/'
+AWS_ACCESS_KEY_ID = 'AKIA424VTZC4VPHHGQGE'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'uniaway'
+AWS_S3_SIGNATURE_NAME = 's3v4'
+AWS_S3_REGION_NAME = 'eu-central-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
