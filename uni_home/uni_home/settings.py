@@ -149,7 +149,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
@@ -182,10 +182,10 @@ LOGIN_URL = '/host_landing/'
 AWS_ACCESS_KEY_ID = 'AKIA424VTZC4VPHHGQGE'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'uniaway'
-AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_SIGNATURE_NAME = 's3v4'
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-# AWS_S3_VERIFY = True
+AWS_S3_VERIFY = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
