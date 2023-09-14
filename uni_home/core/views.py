@@ -59,55 +59,31 @@ def index(request):
          'profile_url': profile_url, 'post_image_urls': image_urls})
 
 
-# def host_index(request):
-#     page = request.GET.get('page')
-#     posts = Post.objects.all().order_by('-created_at')
-#     paginator = Paginator(posts, 6)
-#     for post in posts:
-#         # Retrieve all associated images for the post
-#         post_images = PostImage.objects.filter(post=post)
-
-#         # Store the image URLs in the dictionary
-#         image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
-#     try:
-
-#         posts = paginator.page(page)
-
-#     except PageNotAnInteger:
-#         page = 1
-#         posts = paginator.page(page)
-
-#     except EmptyPage:
-#         page = paginator.num_pages
-#         posts = paginator.page(page)
-
-#     return render(request, 'index.html')
-
 def host_index(request):
-    try:
-        page = request.GET.get('page')
-        posts = Post.objects.all().order_by('created_at')
-        paginator = Paginator(posts, 6)
+    page = request.GET.get('page')
+    posts = Post.objects.all().order_by('created_at')
+    paginator = Paginator(posts, 6)
+    for post in posts:
+        # Retrieve all associated images for the post
+        post_images = PostImage.objects.filter(post=post)
 
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            page = 1
-            posts = paginator.page(page)
-        except EmptyPage:
-            page = paginator.num_pages
-            posts = paginator.page(page)
+        # Store the image URLs in the dictionary
+        image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+    # try:
 
-        # Retrieve all associated images for the posts
-        for post in posts:
-            post_images = PostImage.objects.filter(post=post)
-            # Store the image URLs in the dictionary
-            post.image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+    #     posts = paginator.page(page)
 
-        return render(request, 'index.html')
-    except Exception as e:
-        # Handle any unexpected exceptions gracefully
-        return HttpResponseServerError(f"Internal Server Error: {str(e)}")
+    # except PageNotAnInteger:
+    #     page = 1
+    #     posts = paginator.page(page)
+
+    # except EmptyPage:
+    #     page = paginator.num_pages
+    #     posts = paginator.page(page)
+
+    return render(request, 'index.html')
+
+
 
 
 def landing(request):
