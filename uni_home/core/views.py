@@ -61,11 +61,13 @@ def index(request):
 
 def host_index(request):
     page = request.GET.get('page')
-    posts = Post.objects.all().order_by('-created_at')
+    posts = Post.objects.all().order_by('created_at')
     paginator = Paginator(posts, 6)
+    
     for post in posts:
         # Retrieve all associated images for the post
         post_images = PostImage.objects.filter(post=post)
+        
 
         # Store the image URLs in the dictionary
         image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
