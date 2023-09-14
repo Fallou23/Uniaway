@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'uni_home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'de9iit4vdjjacl',
+         'NAME': 'de9iit4vdjjacl',
         'USER': 'nrvoofexohvwwg',
         'PASSWORD': '728b226bd134466892fb1e8a48577abe21d670e67d5d7981bbc0288c5136ddcd',
         'HOST': 'ec2-99-80-246-170.eu-west-1.compute.amazonaws.com',
