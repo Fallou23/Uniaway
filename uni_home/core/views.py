@@ -61,7 +61,7 @@ def index(request):
 
 def host_index(request):
     page = request.GET.get('page')
-    posts = Post.objects.all().order_by('created_at')
+    posts = Post.objects.all().order_by('-created_at')
     paginator = Paginator(posts, 6)
     for post in posts:
         # Retrieve all associated images for the post
@@ -69,20 +69,23 @@ def host_index(request):
 
         # Store the image URLs in the dictionary
         image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
-    # try:
 
-    #     posts = paginator.page(page)
+    try:
 
-    # except PageNotAnInteger:
-    #     page = 1
-    #     posts = paginator.page(page)
+        posts = paginator.page(page)
 
-    # except EmptyPage:
-    #     page = paginator.num_pages
-    #     posts = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        posts = paginator.page(page)
 
-    return render(request, 'index.html')
+    except EmptyPage:
+        page = paginator.num_pages
+        posts = paginator.page(page)
 
+    return render(
+        request, 'index.html',
+        {'posts': posts, 'paginator': paginator, 'profile_url': profile_url,
+         'post_image_urls': image_urls})
 
 
 
