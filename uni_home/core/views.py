@@ -90,6 +90,7 @@ def host_index(request):
          'post_image_urls': image_urls})
 
 
+
 def landing(request):
 
     user_object = User.objects.get(username=request.user.username)
