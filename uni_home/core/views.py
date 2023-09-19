@@ -70,7 +70,7 @@ def host_index(request):
         
 
         # Store the image URLs in the dictionary
-        image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+        #image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
 
     try:
 
@@ -86,8 +86,8 @@ def host_index(request):
 
     return render(
         request, 'index.html',
-        {'posts': posts, 'paginator': paginator, 'profile_url': profile_url,
-         'post_image_urls': image_urls})
+        {'posts': posts, 'paginator': paginator,
+         'post_images': post_images})
 
 
 
