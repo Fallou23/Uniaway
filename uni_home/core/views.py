@@ -28,7 +28,7 @@ def index(request):
 
         user_object = User.objects.get(username=request.user.username)
         user_profile = Profile.objects.get(user=user_object)
-        profile_url = get_s3_presigned_url(user_profile.profileimg.url)
+        #profile_url = get_s3_presigned_url(user_profile.profileimg.url)
 
         page = request.GET.get('page')
         posts = Post.objects.all().order_by('-created_at')
@@ -51,12 +51,13 @@ def index(request):
             post_images = PostImage.objects.filter(post=post)
 
             # Store the image URLs in the dictionary
-            image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+            #image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
 
     return render(
         request, 'index.html',
         {'user_profile': user_profile, 'posts': posts, 'paginator': paginator,
-         'profile_url': profile_url, 'post_image_urls': image_urls})
+         'user_object':user_object,'post_images':post_images})
+    #'profile_url': profile_url, 'post_image_urls': image_urls
 
 
 def host_index(request):
