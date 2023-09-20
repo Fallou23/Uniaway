@@ -25,11 +25,10 @@
                         <img
                             class="featured"
                             id="featured"
-                            src="{{photos.0}}"
+                            src="{{photos.first.images.url}}"
                         />
                     </div>
-                    {% for photo_url in photos %} {{ photo_url }}<br />
-                    {% endfor %}
+                    
 
                     <div id="slide-wrapper">
                         <img
@@ -40,7 +39,7 @@
 
                         <div id="slider">
                             {% for p in photos %}
-                            <img class="thumbnail active" src="{{p}}" />
+                            <img class="thumbnail active" src="{{p.images.url}}" />
                             {% endfor %}
                         </div>
 
