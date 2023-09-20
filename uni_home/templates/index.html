@@ -33,7 +33,7 @@
                     <a href="/landing"
                         ><h1 class="logo"><span>Uni</span>Away</h1></a
                     >
-                    <img src="{{profile_url}}" alt="Img" />
+                    
                 </div>
                 {% if user.is_authenticated %}
                 <ul>
@@ -61,7 +61,7 @@
                     <div class="header-avatar">
                         <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
-                                <img src="{{profile_url}}" alt="" />
+                                <img src="{{user_profile.profileimg.url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -93,7 +93,7 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
-                                <img src="{{profile_url}}" alt="" />
+                                <img src="{{user_profile.profileimg.url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -131,7 +131,7 @@
                     <div class="header-avatar">
                         <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
-                                <img src="{{profile_url}}" alt="profile" />
+                                <img src="{{user_profile.profileimg.url}}" alt="profile" />
                             </div>
                         </a>
                     </div>
@@ -157,7 +157,7 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
-                                <img src="{{profile_url}}" alt="" />
+                                <img src="{{user_profile.profileimg.url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -213,7 +213,7 @@
                             {% if post.postimage_set.first %}
 
                             <img
-                                src="{{post.post_image_set.first.images.url}}"
+                                src="{{post.postimage_set.first.images.url}}"
                                 class="card-img-top"
                                 alt="Apartment 1 Image 1"
                             />

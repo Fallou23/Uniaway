@@ -96,13 +96,13 @@ def landing(request):
 
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
-    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
+    
     posts = Post.objects.all()
 
     return render(
         request, 'landing.html',
         {'user_profile': user_profile, 'posts': posts, "user_object": user_object,
-         "profile_url": profile_url})
+         })
 
 
 def host_landing(request):
