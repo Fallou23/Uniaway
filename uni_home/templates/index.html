@@ -213,7 +213,7 @@
                             {% if post.postimage_set.first %}
 
                             <img
-                                src="{{post_images.0}}"
+                                src="{{post.post_image_set.first.images.url}}"
                                 class="card-img-top"
                                 alt="Apartment 1 Image 1"
                             />
