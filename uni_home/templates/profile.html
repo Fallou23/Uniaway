@@ -141,7 +141,7 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
-                                <img src="{{profile_url}}" alt="" />
+                                <img src="{{user_profile.profileimg.url}}" alt="" />
                             </div>
                         </a>
                     </div>
@@ -164,7 +164,7 @@
 
                         <div class="upload">
                             <img
-                                src="{{profile_url}}"
+                                src="{{user_profile.profileimg.url}}"
                                 width="150"
                                 height="150"
                                 alt=""
@@ -212,19 +212,14 @@
 
                                 <div class="col-md-4">
                                     <div class="card">
-                                        {% if post.postimage_set.first %}
+                                        
                                         <img
-                                            src="{{user_photos.0}}"
+                                            src="{{post.image.url}}"
                                             class="card-img-top"
                                             alt="ApartmentImage "
                                         />
-                                        {% else %}
-                                        <img
-                                            src="\media\noimages.jpg"
-                                            class="card-img-top"
-                                            alt="ApartmentImage "
-                                        />
-                                        {% endif %}
+                                        
+                                        
                                         <div class="card-body">
                                             {% if user == user_profile.user %}
                                             <div class="delete">

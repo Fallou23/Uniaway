@@ -347,14 +347,13 @@ def profile(request, pk):
     user_profile = Profile.objects.get(user=user_object)
     user_posts = Post.objects.filter(user=pk)
 
-    image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in user_posts]
+    
 
     context = {
         'user_object': user_object,
         'user_profile': user_profile,
         'user_posts': user_posts,
-        'user_photos': image_urls,
-        'profile_url': get_s3_presigned_url(user_profile.profileimg.url)
+        
     }
 
     return render(request, 'profile.html', context)
