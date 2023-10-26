@@ -29,7 +29,7 @@ def index(request):
         user_object = User.objects.get(username=request.user.username)
         user_profile = Profile.objects.get(user=user_object)
         #profile_url = get_s3_presigned_url(user_profile.profileimg.url)
-        post_images = PostImage.objects.filter(post=post)
+        #post_images = PostImage.objects.filter(post=post)
         page = request.GET.get('page')
         posts = Post.objects.all().order_by('-created_at')
         paginator = Paginator(posts, 6)
@@ -56,7 +56,7 @@ def index(request):
     return render(
         request, 'index.html',
         {'user_profile': user_profile, 'posts': posts, 'paginator': paginator,
-         'user_object':user_object,'post_images':post_images})
+         'user_object':user_object,})
     #'profile_url': profile_url, 'post_image_urls': image_urls
 
 
