@@ -29,7 +29,7 @@ def index(request):
         user_object = User.objects.get(username=request.user.username)
         user_profile = Profile.objects.get(user=user_object)
         #profile_url = get_s3_presigned_url(user_profile.profileimg.url)
-
+        post_images = PostImage.objects.filter(post=post)
         page = request.GET.get('page')
         posts = Post.objects.all().order_by('-created_at')
         paginator = Paginator(posts, 6)
@@ -46,9 +46,9 @@ def index(request):
             page = paginator.num_pages
             posts = paginator.page(page)
 
-        for post in posts:
+        
             # Retrieve all associated images for the post
-            post_images = PostImage.objects.filter(post=post)
+            
 
             # Store the image URLs in the dictionary
             #image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
