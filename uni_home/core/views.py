@@ -363,12 +363,11 @@ def post(request, pk):
     user_profile = Profile.objects.get(user=request.user)
     post = get_object_or_404(Post, id=pk)
     photos = PostImage.objects.filter(post=post)
-    image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in photos]
+    
     context = {
         'post': post,
-        'photos': image_urls,
-        'profile_url': get_s3_presigned_url(user_profile.profileimg.url)
-
+        'photos': photos,
+        'user_profile': user_profile
 
     }
 
@@ -378,7 +377,7 @@ def post(request, pk):
 def posts_list_url(request):
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
-    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
+    
     posts = Post.objects.all()
     search_query = request.GET.get('search', '')
     for post in posts:
@@ -386,7 +385,7 @@ def posts_list_url(request):
         post_images = PostImage.objects.filter(post=post)
 
         # Store the image URLs in the dictionary
-        image_urls = [get_s3_presigned_url(post_image.images.url) for post_image in post_images]
+        
 
     if search_query:
         posts = Post.objects.filter(Q(title__icontains=search_query) |
@@ -395,9 +394,8 @@ def posts_list_url(request):
         posts = Post.objects.all()
     return render(
         request, 'index.html',
-        {'user_profile': user_profile, 'posts': posts, "profile_url": profile_url,
-         'post_image_urls': image_urls})
-
+        {'user_profile': user_profile, 'posts': posts,
+         'post_images': post_images})
 
 def about(request):
     return render(request, 'about.html')

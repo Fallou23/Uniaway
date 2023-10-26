@@ -212,17 +212,8 @@
                         <div class="card">
                             {% if post.postimage_set.first %}
 
-                            <img
-                                src="{{post.postimage_set.first.images.url}}"
-                                class="card-img-top"
-                                alt="Apartment 1 Image 1"
-                            />
-                            {% else %}
-                            <img
-                                src="\media\noimages.jpg"
-                                class="card-img-top"
-                                alt="Apartment 1 Image 1"
-                            />
+                            <img src="{{post.postimage_set.first.images.url}}" class="card-img-top" alt="Apartment 1 Image 1">
+                            
                             {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">{{post.title}}</h5>

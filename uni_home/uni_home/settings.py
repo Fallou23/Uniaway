@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 
 import os
+import cloudinary_storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'phonenumber_field',
-    'storages'
+    'storages',
+    'cloudinary_storage',
 
 
 
@@ -100,6 +102,13 @@ WSGI_APPLICATION = 'uni_home.wsgi.application'
  #   }
 #}
 
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+       # 'NAME': BASE_DIR / 'db.sqlite3',
+   # }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -146,21 +155,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# STATIC_URL = 'static/'
-# if DEBUG:
-#     STATICFILES_DIRS=(
-#         os.path.join(BASE_DIR, 'static'),
-#         )
-# else:
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+if DEBUG:
+     STATICFILES_DIRS=(
+        os.path.join(BASE_DIR, 'static'),
+         )
+else:
+     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
-MEDIA_URL = 'https://uniaway.s3.amazonaws.com/media/'
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+#MEDIA_URL = 'https://uniaway.s3.amazonaws.com/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATIC_URL = 'https://uniaway.s3.amazonaws.com/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
@@ -190,14 +202,21 @@ EMAIL_USE_SSL = False
 LOGIN_URL = '/host_landing/'
 
 
-AWS_ACCESS_KEY_ID = 'AKIA424VTZC45NSNFKIG'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'uniaway'
-AWS_S3_SIGNATURE_NAME = 's3v4'
-AWS_S3_REGION_NAME = 'eu-central-1'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-AWS_S3_VERIFY = True
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#AWS_ACCESS_KEY_ID = 'AKIA424VTZC45NSNFKIG'
+#AWS_SECRET_ACCESS_KEY = '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'
+#AWS_STORAGE_BUCKET_NAME = 'uniaway'
+#AWS_S3_SIGNATURE_NAME = 's3v4'
+#AWS_S3_REGION_NAME = 'eu-central-1'
+#AWS_S3_FILE_OVERWRITE = False
+#AWS_DEFAULT_ACL = None
+#AWS_S3_VERIFY = True
+#AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dwvrhsdym',
+    'API_KEY': '581651649529242',
+    'API_SECRET': '7kbO0_RfzSxqaBG-EGa5HV4Uibg'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
