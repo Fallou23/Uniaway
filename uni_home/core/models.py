@@ -21,7 +21,7 @@ class Profile(models.Model):
     seller=models.BooleanField(default=False)
     name_surname=models.CharField(max_length=100, blank=True,null=True)
     bio=models.TextField(blank=True)
-    profileimg=models.ImageField(upload_to='profile_images', default='blank_profile.jpg')
+    profileimg=models.ImageField(upload_to='profile_images')
     location=models.CharField(max_length=100, blank=True)
     università=models.CharField(max_length=100, blank=True)
     phone_number=PhoneNumberField(max_length=15,default='')

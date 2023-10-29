@@ -149,7 +149,8 @@
                 {% endif %}
             </nav>
         </header>
-        {% endif %} {% if user_profile.seller %}
+        {% endif %} 
+        {% if user_profile.seller %}
         <div class="wrapper">
             <section class="first-section">
                 <div class="title">Profilo</div>
@@ -161,7 +162,7 @@
                         enctype="multipart/form-data"
                     >
                         {% csrf_token %}
-
+                        {% if user_profile.profileimg %}
                         <div class="upload">
                             <img
                                 src="{{user_profile.profileimg.url}}"
@@ -169,7 +170,21 @@
                                 height="150"
                                 alt=""
                             />
+                            
                         </div>
+                        {% else %}
+                        <div class="upload">
+                            <img
+                            src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698341436/cld-sample-3.jpg"
+                            width="150"
+                            height="150"
+                            alt=""
+                            />
+                            
+                            
+                        </div>
+                        {% endif %}
+                            
 
                         <div class="container-field">
                             <div class="left-side">

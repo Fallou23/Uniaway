@@ -123,10 +123,10 @@ h6{
     display: flex;
     
     align-items: center;
-    border: 2px solid rgb(17, 0, 255);
+    
   }
   .wrapper #slider{
-    border: 2px solid rgb(47, 255, 47);
+    
     width: 95%;
     margin: auto;
     display: flex;
@@ -145,7 +145,7 @@ h6{
 
   .post-content{
     width: 100%;
-    border: solid 1px purple;
+    
     }
   .post-content .title-position {
     font-size: var(--fs-500);
@@ -163,7 +163,7 @@ h6{
   .post-content .contact {
     display: flex;
     justify-content: space-between;
-    border: solid 1px purple;
+    
     }
 
 }

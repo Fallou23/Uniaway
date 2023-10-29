@@ -173,7 +173,7 @@ def signin(request):
 def settings(request):
 
     user_profile = Profile.objects.get(user=request.user)
-    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
+    
 
     if request.method == 'POST':
 
@@ -208,14 +208,14 @@ def settings(request):
         return redirect('/')
 
     return render(request, 'settings.html', {
-                  'user_profile': user_profile, 'profile_url': profile_url})
+                  'user_profile': user_profile})
 
 
 @login_required(login_url='signin')
 def seller_settings(request):
 
     user_profile = Profile.objects.get(user=request.user)
-    profile_url = get_s3_presigned_url(user_profile.profileimg.url)
+    
 
     if request.method == 'POST':
 
@@ -250,7 +250,7 @@ def seller_settings(request):
         return redirect('/')
 
     return render(request, 'settings.html', {
-                  'user_profile': user_profile, "profile_url": profile_url})
+                  'user_profile': user_profile})
 
 
 @login_required(login_url='signin')
