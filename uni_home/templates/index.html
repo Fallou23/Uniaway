@@ -29,10 +29,17 @@
         {% if user_profile.seller %}
         <header>
             <nav>
+                
                 <div class="site-title">
+                    {% if user.is_authenticated %}
                     <a href="/landing"
                         ><h1 class="logo"><span>Uni</span>Away</h1></a
                     >
+                    {% else %}
+                    <a href="/host_landing"
+                        ><h1 class="logo"><span>Uni</span>Away</h1></a
+                    >
+                    {% endif %}
                     
                 </div>
                 {% if user.is_authenticated %}
@@ -116,7 +123,7 @@
         <header>
             <nav>
                 <div class="site-title">
-                    <a href="/host_landing"
+                    <a href="/landing"
                         ><h1 class="logo"><span>Uni</span>Away</h1></a
                     >
                 </div>
