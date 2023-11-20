@@ -162,7 +162,7 @@
                         enctype="multipart/form-data"
                     >
                         {% csrf_token %}
-                        {% if user_profile.profileimg %}
+                        {% if user.profileimg %}
                         <div class="upload">
                             <img
                                 src="{{user_profile.profileimg.url}}"
