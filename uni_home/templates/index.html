@@ -61,7 +61,16 @@
                     <div class="header-avatar">
                         <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
+                                {{% if user.profileimg %}}
                                 <img src="{{user_profile.profileimg.url}}" alt="" />
+                                {{% else %}}
+                                <img
+                                src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698341436/cld-sample-3.jpg"
+                                width="150"
+                                height="150"
+                                alt=""
+                                />
+                                {{% endif %}}
                             </div>
                         </a>
                     </div>
