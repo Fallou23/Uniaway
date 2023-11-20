@@ -360,14 +360,14 @@ def profile(request, pk):
 
 
 def post(request, pk):
-    user_profile = Profile.objects.get(user=request.user)
+    #user_profile = Profile.objects.get(user=request.user)
     post = get_object_or_404(Post, id=pk)
     photos = PostImage.objects.filter(post=post)
     
     context = {
         'post': post,
         'photos': photos,
-        'user_profile': user_profile
+        #'user_profile': user_profile
 
     }
 
