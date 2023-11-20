@@ -26,62 +26,6 @@
         <title>Document</title>
     </head>
     <body>
-        {% if user_profile.seller %}
-        <header>
-            <nav>
-                <div class="site-title">
-                    <a href="/landing"
-                        ><h1 class="logo"><span>Uni</span>Away</h1></a
-                    >
-                </div>
-                {% if user.is_authenticated %}
-
-                <!--<ul>
-          <li><a href="/profile/{{user_profile}}"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
-          <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
-          <li><a href="/upload"><i class="fa-solid fa-plus"></i><span>Crea annuncio</span> </a></li>
-          <li><a  href="/logout"><i class="fa-solid fa-right-from-bracket"></i> <span class="logout-btn">Logout</span> </a></li>
-      </ul>
-      
-      
-     
-      <div class="left-side-nav">
-        <div class="header-avatar">
-          <a href="/profile/{{user_profile}}">
-            <div class="image-avatar">
-              <img  src="{{user_profile.profileimg.url}}" alt="">
-            </div>
-          </a>
-        </div>
-      </div>-->
-
-                {% else %}
-
-                <!--<ul>
-        <li><a href="/signin"><i class="fa-solid fa-user"></i><span>Profilo</span> </a></li>
-        <li><a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Impostazioni</span> </a></li>
-        <li><a href="/upload"><i class="fa-solid fa-plus"></i><span>Crea annuncio</span> </a></li>
-        
-      </ul>
-    
-    
-      <a href="signin">login</a>
-      <div class="left-side-nav">
-        <div class="header-avatar">
-          <a href="">
-            <div class="image-avatar">
-              <img  src="{{user_profile.profileimg.url}}" alt="">
-            </div>
-          </a>
-        </div>
-      </div>
-    -->
-                {% endif %}
-            </nav>
-        </header>
-
-        {% else %}
-
         <header>
             <nav>
                 <div class="site-title">
