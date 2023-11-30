@@ -38,17 +38,7 @@
 
           
          <div class="upload">
-          {% if user.profileimg %}
-           <img id="preview-image"  src="{{user_profile.profileimg.url}}" alt="" />
-            {% else %}
-              <img
-              id="preview-image" 
-              src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
-              width="150"
-              height="150"
-              alt=""
-              />
-               {% endif %}
+          <img id="preview-image" src="{{user_profile.profileimg.url}}" width="150" height="150" alt="">
           <div class="round">
             <input id="image-input" type="file" name="image" value="">
             <i class="fa fa-camera" style="color: #fff;"></i>
@@ -107,17 +97,7 @@
 
          
        <div class="upload">
-        {% if user.profileimg %}
-           <img id="preview-image"  src="{{user_profile.profileimg.url}}" alt="" />
-            {% else %}
-              <img
-              id="preview-image" 
-              src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
-              width="150"
-              height="150"
-              alt=""
-              />
-               {% endif %}
+        <img id="preview-image" src="{{user_profile.profileimg.url}}" width="150" height="150" alt="">
          <div class="round">
           <input id="image-input" type="file" name="image" value="">
            <i class = "fa fa-camera" style = "color: #fff;"></i>
