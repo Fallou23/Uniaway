@@ -126,8 +126,12 @@
                 {% endif %}
             </nav>
         </header>
+        
+
 
         {% else %}
+
+
 
         <header>
             <nav>
@@ -186,16 +190,16 @@
                 <a href="signin">login</a>
                 <div class="left-side-nav">
                     <div class="header-avatar">
-                        <a href="">
-                            <div class="image-avatar">
+                        {% if user.profileimg %}
+                                <img src="{{user_profile.profileimg.url}}" alt="" />
+                                {% else %}
                                 <img
-                            src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698341436/cld-sample-3.jpg"
-                            width="150"
-                            height="150"
-                            alt=""
-                            />
-                            </div>
-                        </a>
+                                src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
+                                width="150"
+                                height="150"
+                                alt=""
+                                />
+                                {% endif %}
                     </div>
                 </div>
                 {% endif %}
