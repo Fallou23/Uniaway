@@ -128,7 +128,7 @@
         </header>
         
 
-
+        <!--se user non e autentificato-->
         {% else %}
 
 
@@ -190,7 +190,9 @@
                 <a href="signin">login</a>
                 <div class="left-side-nav">
                     <div class="header-avatar">
-                        {% if user.profileimg %}
+                        <a href="">
+                            <div class="image-avatar">
+                                {% if user.profileimg %}
                                 <img src="{{user_profile.profileimg.url}}" alt="" />
                                 {% else %}
                                 <img
@@ -200,6 +202,8 @@
                                 alt=""
                                 />
                                 {% endif %}
+                            </div>
+                        </a>
                     </div>
                 </div>
                 {% endif %}
