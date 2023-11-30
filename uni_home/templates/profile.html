@@ -60,7 +60,16 @@
                     <div class="header-avatar">
                         <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
-                                <img src="{{profile_url}}" alt="" />
+                                {% if user.profileimg %}
+                                <img src="{{user_profile.profileimg.url}}" alt="" />
+                                {% else %}
+                                <img
+                                src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
+                                width="150"
+                                height="150"
+                                alt=""
+                                />
+                                {% endif %}
                             </div>
                         </a>
                     </div>
@@ -86,7 +95,16 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
+                                {% if user.profileimg %}
                                 <img src="{{user_profile.profileimg.url}}" alt="" />
+                                {% else %}
+                                <img
+                                src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
+                                width="150"
+                                height="150"
+                                alt=""
+                                />
+                                {% endif %}
                             </div>
                         </a>
                     </div>
@@ -120,7 +138,7 @@
                         {% else %}
                         <div class="upload">
                             <img
-                            src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698341436/cld-sample-3.jpg"
+                            src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
                             width="150"
                             height="150"
                             alt=""
