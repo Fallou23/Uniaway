@@ -109,7 +109,16 @@
                     <div class="header-avatar">
                         <a href="">
                             <div class="image-avatar">
+                                {% if user.profileimg %}
                                 <img src="{{user_profile.profileimg.url}}" alt="" />
+                                {% else %}
+                                <img
+                                src="https://res.cloudinary.com/dwvrhsdym/image/upload/v1698576250/blank_profile.jpg"
+                                width="150"
+                                height="150"
+                                alt=""
+                                />
+                                {% endif %}
                             </div>
                         </a>
                     </div>
