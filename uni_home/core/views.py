@@ -344,9 +344,9 @@ def delete_post(request, pk):
 @login_required(login_url='signin')
 def profile(request, pk):
 
-    user_object = User.objects.get(username=pk)
-    user_profile = Profile.objects.get(user=user_object)
-    user_posts = Post.objects.filter(user=pk)
+    user_object = get_object_or_404(User, username=pk)
+    user_profile = get_object_or_404(Profile, user=user_object)
+    user_posts = Post.objects.filter(user=user_object)
 
     
 
