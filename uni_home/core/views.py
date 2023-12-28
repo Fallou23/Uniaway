@@ -61,10 +61,11 @@ def index(request):
 
 
 def host_index(request):
+    
     page = request.GET.get('page')
     posts = Post.objects.all().order_by('created_at')
     paginator = Paginator(posts, 6)
-    
+    post_images = []
     for post in posts:
         # Retrieve all associated images for the post
         post_images = PostImage.objects.filter(post=post)

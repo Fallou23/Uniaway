@@ -107,7 +107,7 @@
                 <a href="signin">login</a>
                 <div class="left-side-nav">
                     <div class="header-avatar">
-                        <a href="">
+                        <a href="/profile/{{user_profile}}">
                             <div class="image-avatar">
                                 {% if user.profileimg %}
                                 <img src="{{user_profile.profileimg.url}}" alt="" />
@@ -164,7 +164,7 @@
 
                 <div class="left-side-nav">
                     <div class="header-avatar">
-                        <a href="/profile/{{user_profile}}">
+                        <a href="">
                             <div class="image-avatar">
                                 <img src="{{user_profile.profileimg.url}}" alt="profile" />
                             </div>
